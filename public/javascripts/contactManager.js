@@ -240,6 +240,7 @@ class Controller {
   async addContact(data) {
     await this.model.addContact(data);
     this.view.renderAllContacts(this.model.contacts);
+    this.setOptions();
     this.view.refreshView();
   }
 
@@ -251,6 +252,7 @@ class Controller {
   async editContact(id, data) {
     await this.model.editContact(id, data);
     this.view.renderAllContacts(this.model.contacts);
+    this.setOptions();
     this.view.refreshView();
   }    
 }
@@ -346,9 +348,4 @@ document.addEventListener('DOMContentLoaded', () => {
       app.view.refreshView();
     }
   });
-
-
-
-
- 
 });
