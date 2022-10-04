@@ -1,0 +1,62 @@
+.body {
+  font-family: arial;
+}
+
+.banner {
+  background-color: rebeccapurple;
+  text-align: center;
+  background-size: cover;
+  
+  height: 100px;
+  width: 100%;
+  margin-bottom: 0em;
+  display: table;
+}
+
+.banner-head {
+  display: table-cell;
+  vertical-align: middle;
+  margin-bottom: 0;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+ 
+}
+
+.section {
+  background-color: lightgray;
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.message {
+  padding: 10px;
+}
+
+.messageText {
+  font-size: 18;
+  padding: 10px;
+
+}
+
+.contacts {
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.center {
+  margin: auto;
+  width: 45%;
+  padding: 10px;
+}
+
+.alert {
+  color: red;
+  
+}
