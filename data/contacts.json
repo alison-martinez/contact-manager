@@ -17,35 +17,14 @@
     "full_name": "Nora Martinez",
     "phone_number": "444-444-4444",
     "email": "nora@nora.com",
-    "tags": "family,elkhound",
+    "tags": "family,elkhound,small",
     "id": 3
   },
   {
     "full_name": "Eames",
-    "phone_number": "555-555-5555",
+    "phone_number": "111-111-1111",
     "email": "eames@eames.com",
-    "tags": "cat, family",
-    "id": 5
-  },
-  {
-    "full_name": "Lyanna",
-    "phone_number": "111-111-1111",
-    "email": "lyanna@lyanna.com",
-    "tags": "elkhound,family, nippy rubs",
-    "id": 6
-  },
-  {
-    "full_name": "Clementine",
-    "phone_number": "111-111-1111",
-    "email": "clemmie@clemmie.com",
-    "tags": "holy terror",
-    "id": 7
-  },
-  {
-    "full_name": "Chewie",
-    "phone_number": "111-111-1111",
-    "email": "chewie@chewie.com",
-    "tags": "love",
-    "id": 8
+    "tags": "cute, cat",
+    "id": 4
   }
 ]

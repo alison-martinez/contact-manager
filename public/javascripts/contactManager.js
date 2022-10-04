@@ -222,6 +222,12 @@ class Controller {
     this.view.renderSelect(tags);
   }
 
+  renderHome() {
+    this.view.renderAllContacts(this.model.contacts);
+    this.setOptions();
+    this.view.refreshView();
+  }
+
   setFormDefaults(id) {
     let contact = this.model.getContact(id);
     this.view.form.querySelector('#full_name').setAttribute('value', contact.full_name);
@@ -231,34 +237,27 @@ class Controller {
   }
 
   async renderInitialContacts() {
-    const contactList = await this.model.getContacts();
-    this.view.renderAllContacts(contactList);
-    this.setOptions();
+    await this.model.getContacts();
+    this.renderHome();
     this.view.addContactForm.parentNode.classList.add('hidden');
   }
 
   async addContact(data) {
     await this.model.addContact(data);
-    this.view.renderAllContacts(this.model.contacts);
-    this.setOptions();
-    this.view.refreshView();
+    this.renderHome();
   }
 
   async deleteContact(id) {
     await this.model.deleteContact(id);
-    this.view.renderAllContacts(this.model.contacts);
+    this.renderHome();
   }
 
   async editContact(id, data) {
     await this.model.editContact(id, data);
-    this.view.renderAllContacts(this.model.contacts);
-    this.setOptions();
-    this.view.refreshView();
+    this.renderHome();
   }    
 }
   
-  
-
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Controller(new Model(), new View());
 
