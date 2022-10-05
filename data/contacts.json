@@ -17,14 +17,21 @@
     "full_name": "Nora Martinez",
     "phone_number": "444-444-4444",
     "email": "nora@nora.com",
-    "tags": "family,elkhound,small",
+    "tags": "family,elkhound,cute",
     "id": 3
   },
   {
     "full_name": "Eames",
     "phone_number": "111-111-1111",
     "email": "eames@eames.com",
-    "tags": "cute, cat",
+    "tags": "cute,cat,black",
     "id": 4
+  },
+  {
+    "full_name": "Clementine",
+    "phone_number": "111-111-1111",
+    "email": "clemmie@clemmie.com",
+    "tags": "holy terror, fluffy",
+    "id": 5
   }
 ]

@@ -37,7 +37,7 @@
 }
 
 .messageText {
-  font-size: 18;
+  font-size: 18px;
   padding: 10px;
 
 }
@@ -60,3 +60,25 @@
   color: red;
   
 }
+
+input:focus {
+  border: 1px solid #52be43;
+}
+
+.invalid_field {
+  border: 1px solid #a93333;
+}
+
+.error_message {
+  display: inline-block;
+  margin-left: 175px;
+  padding: 10px;
+}
+
+.form_errors, .error_message {
+  color: #a93333;
+}
+
+
+
+

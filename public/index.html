@@ -44,21 +44,25 @@
 </div>
 
 <div class="center" >
-  <form class="pure-form pure-form-aligned" id="addContactForm" autocomplete="off" >
+  <form class="pure-form pure-form-aligned" id="addContactForm" autocomplete="off" novalidate>
     <fieldset>
         <legend><h2>Create Contact</h2></legend>
         <div class="alert hidden"></div><br>
+        <p class="form_errors"></p>
         <div class="pure-control-group">
           <label for="full_name">Full name:</label>
-          <input  type="text" id="full_name" name="full_name"  />
+          <input  type="text" id="full_name" name="full_name" required  />
+          <span class="error_message"></span>
         </div>
         <div class="pure-control-group">
           <label for="email">Email address:</label>
-          <input  type="email" id="email" name="email"  />
+          <input  type="email" id="email" name="email" required pattern=".+@.+"  />
+          <span class="error_message"></span>
         </div>
         <div class="pure-control-group">
           <label for="phone">Phone number:</label>
-          <input  type="tel" id="phone" name="phone"  />
+          <input  type="tel" id="phone" name="phone" placeholder="###-###-####" required pattern="\d{3}-\d{3}-\d{4}"  />
+          <span class="error_message"></span>
         </div>
         <div class="pure-control-group">
           <label for="tags">Tags:</label>

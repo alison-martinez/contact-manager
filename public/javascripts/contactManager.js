@@ -176,40 +176,16 @@ class Controller {
     this.renderInitialContacts();
   }
 
-  validateData(data) {
-    return this.validateName(data.full_name) && this.validateNumber(data.phone_number) && this.validateEmail(data.email);
-  }
-
-  validateName(name) {
-    if (name.length === 0) {
-      this.view.alert.textContent = 'Full name is a required field.'
-      this.view.alert.classList.remove('hidden');
-    }
-    return name.length > 0;
-  }
-
-  validateNumber(phone) {
-    var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (!phone.match(phoneno)) {
-      this.view.alert.textContent = 'Please enter a valid phone number.'
-      this.view.alert.classList.remove('hidden');
-    }
-    return phone.match(phoneno);
-  }
-
-  validateEmail(email) {
-    var emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!email.match(emailFormat)) {
-      this.view.alert.textContent = 'Please enter a valid email address.'
-      this.view.alert.classList.remove('hidden');
-    }
-    return email.match(emailFormat);
-  }
-
   resetForm() {
     let form = this.view.form;
     let inputs = Array.from(form.querySelectorAll('input'));
-    inputs.forEach(input => input.setAttribute('value', ''));
+    inputs.forEach(input => {
+      input.setAttribute('value', '');
+      if (input.nextElementSibling) {
+        input.nextElementSibling.textContent = '';
+      }
+    });
+    document.querySelector('.form_errors').textContent = '';
     form.reset();
       
     if (this.activeID) {
@@ -234,6 +210,40 @@ class Controller {
     this.view.form.querySelector('#email').setAttribute('value', contact.email);
     this.view.form.querySelector('#phone').setAttribute('value', contact.phone_number);
     this.view.form.querySelector('#tags').setAttribute('value', contact.tags);
+  }
+
+  validateInput(input) {
+    if (input.validity.valueMissing) {
+      this.handleValueAbsence(input);
+      return false;
+    } else if (input.validity.patternMismatch) {
+      this.handlePatternMismatch(input);
+      return false;
+    }
+    return true;
+  }
+
+  handlePatternMismatch(input) {
+    let labelText = input.previousElementSibling.textContent.slice(0, -1).toLowerCase();
+    let error = input.nextElementSibling;
+    error.textContent = 'Please enter a valid ' + labelText + '.';
+
+    input.classList.add('invalid_field');
+  }
+
+  handleValueAbsence(input) {
+    let labelText = input.previousElementSibling.textContent.slice(0, -1);
+    let error = input.nextElementSibling;
+    error.textContent = labelText + ' is a required field.';
+
+    input.classList.add('invalid_field');
+  }
+
+  validateFormInputs() {
+    let self = this;
+    [...document.querySelectorAll('form input')].forEach(element => {
+      self.validateInput(element);
+    });
   }
 
   async renderInitialContacts() {
@@ -288,7 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'phone_number': form.phone.value,
       'tags': form.tags.value
     };
-    if (app.validateData(data)) {
+    if (form.checkValidity()) {
+      document.querySelector('.form_errors').textContent = '';
       if (app.activeID === null) {
         app.addContact(data);
       } else {
@@ -297,10 +308,33 @@ document.addEventListener('DOMContentLoaded', () => {
         app.activeID = null;
       }
     } else {
-      app.resetForm();
+      document.querySelector('.form_errors').textContent = 'Form cannot be submitted until errors are corrected.'
+      app.validateFormInputs();
+      setTimeout(() => {
+        document.querySelector('.form_errors').textContent = '';
+      }, 5000);
+
     }
     
   });
+
+  [...document.querySelectorAll('form input')].forEach(element => {
+    if (!element.nextElementSibling) return;
+    element.addEventListener('blur', event => {
+      let input = event.target;
+      if (input.checkValidity()) {
+        input.nextElementSibling.textContent = '';
+      }
+      app.validateInput(input);
+    });
+
+    element.addEventListener('focus', event => {
+      let input = event.target;
+      input.nextElementSibling.textContent = '';
+      input.classList.remove('invalid_field'); 
+    });
+  });
+
 
   document.querySelector('.contacts').addEventListener('click', event => {
     event.preventDefault();
@@ -347,4 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
       app.view.refreshView();
     }
   });
+
+
+
 });
